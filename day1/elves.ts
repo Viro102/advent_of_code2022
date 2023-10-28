@@ -51,7 +51,7 @@ function getMaxThree(data: string) {
   console.log("part 2: " + res);
 }
 
-readFromFile("day1/input")
+readFromFile("input")
   .then((data) => {
     getMax(data);
     getMaxThree(data);

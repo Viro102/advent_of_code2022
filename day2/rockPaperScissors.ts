@@ -6,13 +6,18 @@ const scoringRules: { [key: string]: { [key: string]: number } } = {
   C: { X: 6 + 1, Y: 0 + 2, Z: 3 + 3 },
 };
 
+// Part 1
+function getTotalScore(data: string) {
+  const scores = data.split("\n").map((value) => {
+    const [opponent, player] = value.split(" ");
+    return scoringRules[opponent]?.[player] || 0;
+  });
+  return scores.reduce((prev, curr) => (prev ?? 0) + (curr ?? 0), 0);
+}
+
 readFromFile("input")
   .then((data) => {
-    const scores = data.split("\n").map((value) => {
-      const [opponent, player] = value.split(" ");
-      return scoringRules[opponent]?.[player] || 0;
-    });
-    const totalScore = scores.reduce((prev, curr) => (prev ?? 0) + (curr ?? 0), 0);
+    const totalScore = getTotalScore(data);
     console.log("Result score: " + totalScore);
   })
   .catch((err) => console.error(err));

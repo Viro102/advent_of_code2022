@@ -1,17 +1,6 @@
-import { readFile } from "fs";
+import { readFromFile } from "../index";
 
-function readFromFile(fileName: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    readFile(fileName, "ascii", (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-}
-
+// Part 1
 function getMax(data: string) {
   let maxLocal: number = 0;
   let maxGlobal: number = 0;
@@ -29,6 +18,7 @@ function getMax(data: string) {
   console.log("part 1: " + maxGlobal);
 }
 
+// Part 2
 function getMaxThree(data: string) {
   let maxLocal: number = 0;
   const ar: number[] = [];

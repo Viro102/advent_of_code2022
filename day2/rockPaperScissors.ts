@@ -12,7 +12,6 @@ const scoringRulesPt2: { [key: string]: { [key: string]: number } } = {
   C: { X: 0 + 2, Y: 3 + 3, Z: 6 + 1 },
 };
 
-
 // Part 1
 function getScorePt1(data: string) {
   const scores = data.split("\n").map((value) => {
@@ -30,7 +29,6 @@ function getScorePt2(data: string) {
   });
   return scores.reduce((prev, curr) => (prev ?? 0) + (curr ?? 0), 0);
 }
-
 
 readFromFile("input")
   .then((data) => {

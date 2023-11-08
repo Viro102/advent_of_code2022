@@ -9,31 +9,51 @@ const data = await readFromFile("input");
 data.split("\n").forEach((value) => {
   const firstHalf: string = value.substring(0, value.length / 2);
   const secondHalf: string = value.substring(value.length / 2);
-  const upperCase: number = 38;
-  const lowerCase: number = 96;
+  const arrLines: string[] = [firstHalf, secondHalf];
 
-  for (const element of firstHalf) {
-    const character: string = element;
+  const commonLetter: string | null = findCommonLetter(arrLines);
 
-    if (secondHalf.includes(character)) {
-      if (character.charCodeAt(0) >= 97 && character.charCodeAt(0) <= 122) {
-        sumP1 += character.charCodeAt(0) - lowerCase;
-      } else {
-        sumP1 += character.charCodeAt(0) - upperCase;
-      }
-      break;
-    }
+  if (commonLetter !== null) {
+    sumP1 += getPriority(commonLetter);
   }
 });
 
-// part 2 - WIP
+// part 2
 const lines: string[] = data.split("\n");
-for (let i = 0; i < lines.length; i++) {
-  const line: string = lines[i];
-  if (i % 3 === 0) {
-    // sum and flush
+for (let i = 0; i < lines.length; i += 3) {
+  const arrLines: string[] = [lines[i], lines[i + 1], lines[i + 2]];
+
+  const commonLetter: string | null = findCommonLetter(arrLines);
+
+  if (commonLetter !== null) {
+    sumP2 += getPriority(commonLetter);
   }
 }
 
+// utils
+function findCommonLetter(arr: string[]): string | null {
+  const [firstString, ...restStrings] = arr;
+
+  for (const char of firstString) {
+    if (restStrings.every((str) => str.includes(char))) {
+      return char;
+    }
+  }
+
+  return null;
+}
+
+function getPriority(char: string) {
+  const upperCase: number = 38;
+  const lowerCase: number = 96;
+
+  if (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122) {
+    return char.charCodeAt(0) - lowerCase;
+  } else {
+    return char.charCodeAt(0) - upperCase;
+  }
+}
+
+// output
 console.log(sumP1);
 console.log(sumP2);

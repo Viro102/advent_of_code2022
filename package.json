@@ -1,5 +1,6 @@
 {
   "name": "ts_practice",
+  "type": "module",
   "version": "1.0.0",
   "devDependencies": {
     "typescript": "^5.2.2",

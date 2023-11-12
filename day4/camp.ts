@@ -5,14 +5,16 @@ let numP2 = 0;
 
 const data: string = await readFromFile("input");
 const ranges = parseRanges(data);
-console.log(ranges[0][0]);
 
 // part 1
 ranges.forEach((array) =>
   checkInRange([array[0], array[1]], [array[2], array[3]]) ? numP1++ : null
 );
 
-// TODO: part 2
+// part 2
+ranges.forEach((array) =>
+  checkOverlap([array[0], array[1]], [array[2], array[3]]) ? numP2++ : null
+);
 
 // utils
 function parseRanges(data: string): number[][] {
@@ -41,5 +43,17 @@ function checkInRange(range1: number[], range2: number[]): boolean {
   }
 }
 
+function checkOverlap(range1: number[], range2: number[]) {
+  if (
+    checkInRange(range1, range2) ||
+    (range1[0] <= range2[1] && range1[1] >= range2[1]) ||
+    (range1[0] <= range2[0] && range1[1] >= range2[0])
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 console.log(numP1); // 536
-console.log(numP2);
+console.log(numP2); // 845
